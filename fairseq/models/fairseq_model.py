@@ -154,10 +154,11 @@ class BaseFairseqModel(nn.Module):
                 - a str with the name of a pre-trained model to load
                 - a path or url to a pretrained model state dict
         """
-        from fairseq import checkpoint_utils, file_utils, options, tasks
+        from fairseq import checkpoint_utils, options, tasks
+        from fairseq.hub import hub_utils
 
-        model_path = file_utils.load_archive_file(model_name_or_path)
-        data_path = file_utils.load_archive_file(data_name_or_path)
+        model_path = hub_utils.load_archive_file(model_name_or_path)
+        data_path = hub_utils.load_archive_file(data_name_or_path)
         checkpoint_path = os.path.join(model_path, 'model.pt')
 
         # set data and parse

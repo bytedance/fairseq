@@ -10,10 +10,7 @@ import argparse
 import torch
 import sys
 
-from fairseq.criterions import CRITERION_REGISTRY
 from fairseq.models import ARCH_MODEL_REGISTRY, ARCH_CONFIG_REGISTRY
-from fairseq.optim import OPTIMIZER_REGISTRY
-from fairseq.optim.lr_scheduler import LR_SCHEDULER_REGISTRY
 from fairseq.registry import REGISTRIES
 from fairseq.tasks import TASK_REGISTRY
 from fairseq.utils import import_user_module
@@ -96,7 +93,9 @@ def parse_args_and_arch(parser, input_args=None, parse_known=False):
     for registry_name, REGISTRY in REGISTRIES.items():
         choice = getattr(args, registry_name, None)
         if choice is not None:
-            REGISTRY['registry'][choice].add_args(parser)
+            cls = REGISTRY['registry'][choice]
+            if hasattr(cls, 'add_args'):
+                cls.add_args(parser)
     if hasattr(args, 'task'):
         TASK_REGISTRY[args.task].add_args(parser)
 

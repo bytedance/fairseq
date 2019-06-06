@@ -35,7 +35,8 @@ class MaskedLMTask(FairseqTask):
     @staticmethod
     def add_args(parser):
         """Add task-specific arguments to the parser."""
-        parser.add_argument('data', help='colon separated path to data directories list, \
+        parser.add_argument('data', nargs='?', help='deprecated, use --data instead')
+        parser.add_argument('--data', help='colon separated path to data directories list, \
                             will be iterated upon during epochs in round-robin manner')
         parser.add_argument('--tokens-per-sample', default=512, type=int,
                             help='max number of total tokens over all segments'

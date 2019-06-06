@@ -58,7 +58,8 @@ class LanguageModelingTask(FairseqTask):
     def add_args(parser):
         """Add task-specific arguments to the parser."""
         # fmt: off
-        parser.add_argument('data', help='path to data directory')
+        parser.add_argument('data', nargs='?', help='deprecated, use --data instead')
+        parser.add_argument('--data')
         parser.add_argument('--sample-break-mode',
                             choices=['none', 'complete', 'eos'],
                             help='If omitted or "none", fills each sample with tokens-per-sample '

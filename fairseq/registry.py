@@ -29,7 +29,10 @@ def setup_registry(
     }
 
     def build_x(args, *extra_args, **extra_kwargs):
-        cls = REGISTRY[getattr(args, registry_name)]
+        choice = getattr(args, registry_name, None)
+        if choice is None:
+            return None
+        cls = REGISTRY[choice]
         if hasattr(cls, 'build_' + registry_name):
             builder = getattr(cls, 'build_' + registry_name)
         else:

@@ -103,7 +103,9 @@ class TranslationTask(FairseqTask):
     def add_args(parser):
         """Add task-specific arguments to the parser."""
         # fmt: off
-        parser.add_argument('data', help='colon separated path to data directories list, \
+        parser.add_argument('data', nargs='?', help='deprecated, use --data instead')
+        parser.add_argument('--data',
+                            help='colon separated path to data directories list, \
                             will be iterated upon during epochs in round-robin manner')
         parser.add_argument('-s', '--source-lang', default=None, metavar='SRC',
                             help='source language')
@@ -111,7 +113,7 @@ class TranslationTask(FairseqTask):
                             help='target language')
         parser.add_argument('--lazy-load', action='store_true',
                             help='load the dataset lazily')
-        parser.add_argument('--raw-text', default=False, action='store_true',
+        parser.add_argument('--raw-text', action='store_true',
                             help='load raw text dataset')
         parser.add_argument('--left-pad-source', default='True', type=str, metavar='BOOL',
                             help='pad the source on the left')

@@ -66,7 +66,8 @@ class MultilingualTranslationTask(FairseqTask):
     def add_args(parser):
         """Add task-specific arguments to the parser."""
         # fmt: off
-        parser.add_argument('data', metavar='DIR', help='path to data directory')
+        parser.add_argument('data', nargs='?', help='deprecated, use --data instead')
+        parser.add_argument('--data', metavar='DIR', help='path to data directory')
         parser.add_argument('--lang-pairs', default=None, metavar='PAIRS',
                             help='comma-separated list of language pairs (in training order): en-de,en-fr,de-fr')
         parser.add_argument('-s', '--source-lang', default=None, metavar='SRC',
